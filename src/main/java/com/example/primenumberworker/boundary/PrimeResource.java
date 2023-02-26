@@ -1,6 +1,8 @@
 package com.example.primenumberworker.boundary;
 
-import com.example.primenumberworker.control.PrimeService;
+import com.example.primenumberworker.control.PrimeConfig;
+import com.example.primenumberworker.control.PrimeGenerator;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,18 +10,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigInteger;
+import java.util.Random;
 
 import static org.springframework.http.ResponseEntity.ok;
 
 @RequestMapping("/api/prime")
 @RestController
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class PrimeResource {
 
-  private final PrimeService primeService;
+  private final PrimeConfig config;
 
   @GetMapping("/random")
   public ResponseEntity<BigInteger> findRandomPrimeNumber() {
-    return ok(primeService.generateRandomPrime());
+    return ok(new PrimeGenerator(config).get());
   }
 }
