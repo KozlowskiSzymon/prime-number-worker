@@ -4,6 +4,7 @@ import com.example.primenumberworker.control.PrimeConfig;
 import com.example.primenumberworker.control.PrimeGenerator;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,12 +18,14 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping("/api/prime")
 @RestController
 @AllArgsConstructor
+@Slf4j
 public class PrimeResource {
 
   private final PrimeConfig config;
 
   @GetMapping("/random")
   public ResponseEntity<BigInteger> findRandomPrimeNumber() {
+    log.info("PrimeResource.findRandomPrimeNumber GET /random");
     return ok(new PrimeGenerator(config).get());
   }
 }
