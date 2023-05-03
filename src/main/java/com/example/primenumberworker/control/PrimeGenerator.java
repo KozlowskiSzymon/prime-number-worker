@@ -25,12 +25,15 @@ public class PrimeGenerator implements Supplier<BigInteger> {
 
     private final PrimeConfig config;
 
+    private List<String> primes;
+
     @Override
     public BigInteger get() {
         Map<BigInteger, Boolean> numberList = new ConcurrentHashMap<>();
         List<Callable<Pair<BigInteger,Boolean>>> tasks = new ArrayList<>();
         for (BigInteger i = BigInteger.valueOf(1); i.compareTo(config.getArrayMaxSize()) <= 0; i = i.add(BigInteger.ONE)) {
             BigInteger finalI = i;
+            primes.add(i.toString());
             tasks.add(() -> {
                 log.info("[Prime] Checking number: {}", finalI);
                 return Pair.of(finalI, isPrime(finalI));
