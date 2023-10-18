@@ -10,16 +10,6 @@ app:
       pool:
         size: 10
 
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/workload?currentSchema:prime
-    username: workload
-    password: abc123
-  jpa:
-    properties:
-      hibernate:
-        default_schema: prime
-
 management:
   server:
     port: 8081

@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.example</groupId>
     <artifactId>prime-number-worker</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.1</version>
     <name>prime-number-worker</name>
     <description>Demo project for Spring Boot</description>
     <properties>
@@ -68,16 +68,13 @@
             <artifactId>reactor-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.5.0</version>
-        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-core -->
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <version>9.6.0</version>
+            <version>9.19.1</version>
         </dependency>
+
     </dependencies>
 
     <build>
