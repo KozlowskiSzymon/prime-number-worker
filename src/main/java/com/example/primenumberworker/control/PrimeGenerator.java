@@ -9,9 +9,11 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -27,8 +29,11 @@ public class PrimeGenerator implements Supplier<BigInteger> {
 
     private List<String> primes;
 
+    private Queue<String> load;
+
     @Override
     public BigInteger get() {
+        load = new ConcurrentLinkedQueue<>();
         Map<BigInteger, Boolean> numberList = new ConcurrentHashMap<>();
         List<Callable<Pair<BigInteger,Boolean>>> tasks = new ArrayList<>();
         for (BigInteger i = BigInteger.valueOf(1); i.compareTo(config.getArrayMaxSize()) <= 0; i = i.add(BigInteger.ONE)) {
@@ -60,6 +65,11 @@ public class PrimeGenerator implements Supplier<BigInteger> {
             if (number.remainder(i).compareTo(BigInteger.valueOf(0)) == 0) {
                 prime = false;
                 break;
+            }
+        }
+        if (prime) {
+            for (BigInteger i = BigInteger.valueOf(1); i.compareTo(number) <= 0; i = i.add(BigInteger.ONE)) {
+                load.add(i.toString());
             }
         }
         log.debug("[Prime] Number: {} isPrime: {}", number, prime);
