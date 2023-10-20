@@ -33,7 +33,6 @@ public class PrimeGenerator implements Supplier<BigInteger> {
 
     @Override
     public BigInteger get() {
-        load = new ConcurrentLinkedQueue<>();
         Map<BigInteger, Boolean> numberList = new ConcurrentHashMap<>();
         List<Callable<Pair<BigInteger,Boolean>>> tasks = new ArrayList<>();
         for (BigInteger i = BigInteger.valueOf(1); i.compareTo(config.getArrayMaxSize()) <= 0; i = i.add(BigInteger.ONE)) {
