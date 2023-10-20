@@ -66,7 +66,7 @@ public class PrimeGenerator implements Supplier<BigInteger> {
                 break;
             }
         }
-        if (prime) {
+        if (config.isAdditionalMemoryLoad() && prime) {
             for (BigInteger i = BigInteger.valueOf(1); i.compareTo(number) <= 0; i = i.add(BigInteger.ONE)) {
                 load.add(i.toString());
             }

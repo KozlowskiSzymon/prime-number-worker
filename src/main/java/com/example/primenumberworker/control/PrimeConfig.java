@@ -15,4 +15,7 @@ public class PrimeConfig {
 
   @Value("${app.prime.thread.pool.size}")
   private Integer threadPoolSize;
+
+  @Value("${app.prime.additionalMemoryLoad}")
+  private boolean additionalMemoryLoad;
 }

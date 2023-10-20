@@ -3,6 +3,7 @@ server:
   
 app:
   prime:
+    additionalMemoryLoad: false
     array:
       size:
         max: 500
